@@ -1,0 +1,3 @@
+# Restrict .idea folder and extra iconFiles from being pushed
+.idea/
+.iconFiles/
