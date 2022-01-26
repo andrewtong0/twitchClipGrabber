@@ -1,4 +1,4 @@
-getImage.onclick = function() {
+downloadTwitchClip.onclick = function() {
   chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
     chrome.tabs.executeScript(
       tabs[0].id,
@@ -55,3 +55,21 @@ getRedditVideoUrl.onclick = function() {
             });
     });
 };
+
+chrome.tabs.query({'active': true, 'currentWindow': true}, function (tabs) {
+    let url = tabs[0].url;
+    if (url.includes("reddit")) {
+        console.log("WEE REDDIT");
+        document.getElementById("getRedditVideoUrl").style.display = "block";
+        document.getElementById("downloadTwitchClip").style.display = "none";
+    } else if (url.includes("twitch")) {
+        document.getElementById("getRedditVideoUrl").style.display = "none";
+        document.getElementById("downloadTwitchClip").style.display = "block";
+    } else {
+        document.getElementById("getRedditVideoUrl").style.display = "none";
+        document.getElementById("downloadTwitchClip").style.display = "none";
+        let error = document.getElementById('errorMsg');
+        error.innerHTML = "No matching domain found";
+        error.style.width = "200px";
+    }
+});
